@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
+import client from '../data/db';
 
-import * as contactsService from '../services/contacts';
+export const getAll = async(req: Request, res: Response) => {
+  const allContacts = await client.query('SELECT * FROM contacts');
 
-export const getAll = (req: Request, res: Response) => {
-  const data = contactsService.getAllContacts();
-
-  res.send(data);
+  res.statusCode = 200;
+  res.send(allContacts.rows);
 };
 
 export const addContact = (req: Request, res: Response) => {
@@ -18,7 +18,7 @@ export const addContact = (req: Request, res: Response) => {
   }
 
   res.statusCode = 201;
-  res.send(contactsService.addContact(newContact));
+  res.send();
 };
 
 export const removeContact = (req: Request, res: Response) => {
@@ -31,7 +31,7 @@ export const removeContact = (req: Request, res: Response) => {
   }
 
   res.statusCode = 200;
-  res.send(contactsService.removeContact(+id));
+  res.send();
 };
 
 export const editContact = (req: Request, res: Response) => {
@@ -46,5 +46,5 @@ export const editContact = (req: Request, res: Response) => {
 
   res.statusCode = 200;
 
-  res.send(contactsService.editContact(+id, newContact));
+  res.send();
 };

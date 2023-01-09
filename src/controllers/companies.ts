@@ -1,12 +1,8 @@
 import { Request, Response } from 'express';
 
-import * as companiesService from '../services/companies';
-
 export const getAll = (req: Request, res: Response) => {
-  const data = companiesService.getAllCompanies();
-
   res.statusCode = 200;
-  res.send(data);
+  res.send();
 };
 
 export const addCompany = (req: Request, res: Response) => {
@@ -19,7 +15,7 @@ export const addCompany = (req: Request, res: Response) => {
   }
 
   res.statusCode = 201;
-  res.send(companiesService.addCompany(newCompany));
+  res.send();
 };
 
 export const removeCompany = (req: Request, res: Response) => {
@@ -32,7 +28,7 @@ export const removeCompany = (req: Request, res: Response) => {
   }
 
   res.statusCode = 200;
-  res.send(companiesService.removeCompany(+id));
+  res.send();
 };
 
 export const editCompany = (req: Request, res: Response) => {
@@ -47,5 +43,5 @@ export const editCompany = (req: Request, res: Response) => {
 
   res.statusCode = 200;
 
-  res.send(companiesService.editCompany(+id, newCompany));
+  res.send();
 };
