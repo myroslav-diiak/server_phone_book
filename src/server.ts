@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+import cors from 'cors';
 import express from 'express';
 import serverless from 'serverless-http';
 import { router } from './routers/router';
@@ -9,6 +10,7 @@ const BASE_URL = '/.netlify/functions/server';
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 client.connect();
