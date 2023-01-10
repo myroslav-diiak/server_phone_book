@@ -61,7 +61,7 @@ export const removeContact = async(req: Request, res: Response) => {
 
 export const editContact = async(req: Request, res: Response) => {
   const { contactId } = req.params;
-  const { newContact } = JSON.parse(req.body.toString());
+  const { newContact } = req.body;
 
   if (!contactId || !newContact) {
     res.sendStatus(400);
@@ -70,7 +70,6 @@ export const editContact = async(req: Request, res: Response) => {
   }
 
   const {
-    id,
     name,
     lastname,
     adress,
@@ -93,7 +92,17 @@ export const editContact = async(req: Request, res: Response) => {
     companyId = $8
     WHERE id = $9
     RETURNING *`,
-    [name, lastname, adress, city, country, email, number, companyId, id],
+    [
+      name,
+      lastname,
+      adress,
+      city,
+      country,
+      email,
+      number,
+      companyId,
+      contactId,
+    ],
   );
 
   res.statusCode = 200;

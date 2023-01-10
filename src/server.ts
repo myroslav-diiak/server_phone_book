@@ -20,17 +20,17 @@ router.get('/', (req, res) => {
   <br>
   <h2>GET: /companies</h2> <p>to get all companies</p>
   <br>
-  <h2>POST: /companies</h2> <p>to add company (returns all companies)</p>
+  <h2>POST: /companies</h2> <p>to add company (returns new company)</p>
   <br>
-  <h2>POST: /contacts</h2> <p>to add contact (returns all contacts)</p>
+  <h2>POST: /contacts</h2> <p>to add contact (returns new contact)</p>
   <br>
-  <h2>DELETE: /contacts/:id</h2> <p>to remove contact (returns all contacts)</p>
+  <h2>DELETE: /contacts/:id</h2> <p>to remove contact (returns deleted contact)</p>
   <br>
-  <h2>DELETE: /companies/:id</h2> <p>to remove company (returns all companies)</p>
+  <h2>DELETE: /companies/:id</h2> <p>to remove company (returns deleted company)</p>
   <br>
-  <h2>PATCH: /contacts/:id</h2> <p>to edit contact (returns all contacts)</p>
+  <h2>PATCH: /contacts/:id</h2> <p>to edit contact (returns updated contact)</p>
   <br>
-  <h2>PATCH: /companies/:id</h2> <p>to edit company (returns all companies)</p>
+  <h2>PATCH: /companies/:id</h2> <p>to edit company (returns updated company)</p>
   <br>
   `);
 });

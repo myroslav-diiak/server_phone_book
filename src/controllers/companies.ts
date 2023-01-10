@@ -1,12 +1,17 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { Request, Response } from 'express';
 
-export const getAll = (req: Request, res: Response) => {
+const client = require('../data/db');
+
+export const getAll = async(req: Request, res: Response) => {
+  const allCompanies = await client.query('SELECT * FROM companies');
+
   res.statusCode = 200;
-  res.send();
+  res.send(allCompanies.rows);
 };
 
-export const addCompany = (req: Request, res: Response) => {
-  const { newCompany } = JSON.parse(req.body.toString());
+export const addCompany = async(req: Request, res: Response) => {
+  const { newCompany } = req.body;
 
   if (!newCompany) {
     res.sendStatus(400);
@@ -14,11 +19,19 @@ export const addCompany = (req: Request, res: Response) => {
     return;
   }
 
+  const { id, name, link } = newCompany;
+
+  const resposeData = await client.query(
+    `INSERT INTO companies (id, name, link)
+    values ($1, $2, $3) RETURNING *`,
+    [id, name, link],
+  );
+
   res.statusCode = 201;
-  res.send();
+  res.send(resposeData.rows[0]);
 };
 
-export const removeCompany = (req: Request, res: Response) => {
+export const removeCompany = async(req: Request, res: Response) => {
   const { id } = req.params;
 
   if (!id) {
@@ -27,21 +40,33 @@ export const removeCompany = (req: Request, res: Response) => {
     return;
   }
 
+  const resposeData = await client.query(
+    'DELETE FROM companies WHERE id = $1 RETURNING *',
+    [id],
+  );
+
   res.statusCode = 200;
-  res.send();
+  res.send(resposeData.rows[0]);
 };
 
-export const editCompany = (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { newCompany } = JSON.parse(req.body.toString());
+export const editCompany = async(req: Request, res: Response) => {
+  const { companyId } = req.params;
+  const { newCompany } = req.body;
 
-  if (!id || !newCompany) {
+  if (!companyId || !newCompany) {
     res.sendStatus(400);
 
     return;
   }
 
+  const { name, link } = newCompany;
+
+  const resposeData = await client.query(
+    `UPDATE companies set name = $1, link = $2 WHERE id = $3 RETURNING *`,
+    [name, link, companyId],
+  );
+
   res.statusCode = 200;
 
-  res.send();
+  res.send(resposeData.rows[0]);
 };
