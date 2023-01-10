@@ -1,10 +1,15 @@
 import express from 'express';
 import serverless from 'serverless-http';
 import { router } from './routers/router';
+import client from '/data/db';
 
 const BASE_URL = '/.netlify/functions/server';
 
 const app = express();
+
+app.use(express.json());
+
+client.connect();
 
 router.get('/', (req, res) => {
   res.send(`

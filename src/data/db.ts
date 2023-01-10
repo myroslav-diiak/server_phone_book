@@ -8,6 +8,4 @@ const client = new Client({
   database: "laiiwvuk"
 });
 
-client.connect();
-
 module.exports = client;
