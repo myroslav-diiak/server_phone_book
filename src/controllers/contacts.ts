@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { Request, Response } from 'express';
-import client from '../data/db';
+
+const client = require('../data/db');
 
 export const getAll = async(req: Request, res: Response) => {
   const allContacts = await client.query('SELECT * FROM contacts');
@@ -49,7 +51,7 @@ export const removeContact = async(req: Request, res: Response) => {
   }
 
   const resposeData = await client.query(
-    'DELETE FROM contacts WHERE id = $1',
+    'DELETE FROM contacts WHERE id = $1 RETURNING *',
     [id],
   );
 

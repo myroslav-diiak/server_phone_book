@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import express from 'express';
 import serverless from 'serverless-http';
 import { router } from './routers/router';
-import client from '/data/db';
+
+const client = require('./data/db');
 
 const BASE_URL = '/.netlify/functions/server';
 
