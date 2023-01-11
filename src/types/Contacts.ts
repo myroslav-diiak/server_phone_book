@@ -7,5 +7,5 @@ export interface Contact {
   country: string,
   email: string,
   number: string,
-  companyId: number
+  companyid: number
 }

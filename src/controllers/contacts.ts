@@ -28,13 +28,13 @@ export const addContact = async(req: Request, res: Response) => {
     country,
     email,
     number,
-    companyId,
+    companyid,
   } = newContact;
 
   const resposeData = await client.query(
     `INSERT INTO contacts (id, name, lastname, adress, city, country, email, number, companyId)
     values ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
-    [id, name, lastname, adress, city, country, email, number, companyId],
+    [id, name, lastname, adress, city, country, email, number, companyid],
   );
 
   res.statusCode = 201;
@@ -77,7 +77,7 @@ export const editContact = async(req: Request, res: Response) => {
     country,
     email,
     number,
-    companyId,
+    companyid,
   } = newContact;
 
   const resposeData = await client.query(
@@ -100,7 +100,7 @@ export const editContact = async(req: Request, res: Response) => {
       country,
       email,
       number,
-      companyId,
+      companyid,
       contactId,
     ],
   );
