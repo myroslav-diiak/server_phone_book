@@ -19,12 +19,12 @@ export const addCompany = async(req: Request, res: Response) => {
     return;
   }
 
-  const { id, name, link } = newCompany;
+  const { id, name, link, logolink } = newCompany;
 
   const resposeData = await client.query(
-    `INSERT INTO companies (id, name, link)
-    values ($1, $2, $3) RETURNING *`,
-    [id, name, link],
+    `INSERT INTO companies (id, name, link, logolink)
+    values ($1, $2, $3, $4) RETURNING *`,
+    [id, name, link, logolink],
   );
 
   res.statusCode = 201;
@@ -59,11 +59,11 @@ export const editCompany = async(req: Request, res: Response) => {
     return;
   }
 
-  const { name, link } = newCompany;
+  const { name, link, logolink } = newCompany;
 
   const resposeData = await client.query(
-    `UPDATE companies set name = $1, link = $2 WHERE id = $3 RETURNING *`,
-    [name, link, companyId],
+    `UPDATE companies set name = $1, link = $2, logolink = $3 WHERE id = $4 RETURNING *`,
+    [name, link, logolink, companyId],
   );
 
   res.statusCode = 200;
