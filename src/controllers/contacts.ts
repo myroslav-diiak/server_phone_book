@@ -4,7 +4,9 @@ import { Request, Response } from 'express';
 const client = require('../data/db');
 
 export const getAll = async(req: Request, res: Response) => {
-  const allContacts = await client.query('SELECT * FROM contacts');
+  const allContacts = await client.query(`SELECT *
+    FROM contacts 
+    ORDER BY id ASC`);
 
   res.statusCode = 200;
   res.send(allContacts.rows);
